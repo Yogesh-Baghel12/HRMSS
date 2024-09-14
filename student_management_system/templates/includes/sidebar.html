@@ -1,0 +1,109 @@
+{% load static %}
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+       <div id="sidebar-menu" class="sidebar-menu">
+         {% if user.user_type == '1' %}
+          <ul>
+            <li class="submenu">
+                <a href="{% url "home" %}"><i class="fas fa-columns"></i> <span style="color:orange;">Dashboard</span> <span class="menu"></span></a>
+             </li>
+             <li class="submenu">
+                <a href="{% url "view_employee" %}"><i class="fas fa-users"></i> <span style="color:orange;">Employee</span> <span class="menu"></span></a>
+                <ul>
+                  
+                   <li><a href="{% url "add_employee" %}">Add Employee</a></li>
+                   <li><a href="{% url "view_employee" %}">View Employee</a></li>
+                </ul>
+             </li>
+             <li class="submenu">
+                <a href="{% url "view_manager" %}"><i class="fas fa-chalkboard-teacher"></i> <span style="color:orange;"> Manager</span> <span class="menu"></span></a>
+                <ul>
+                   
+                   <li><a href="{% url "add_manager" %}">Add Manager </a></li>
+                   <li><a href="{% url "view_manager" %}">View Manager </a></li>
+                </ul>
+             </li>
+             <li class="submenu">
+                <a href="{% url "view_department" %}"><i class="fas fa-building"></i> <span style="color:orange;"> Departments</span> <span class="menu"></span></a>
+                <ul>
+                   
+                   <li><a href="{% url "add_department" %}">Add Department</a></li>
+                   <li><a href="{% url "view_department" %}">View Department</a></li>
+                </ul>
+               </li>
+             <!--<li>
+               <a href="#"><i class="fas fa-bell"></i> <span style="color:orange;">Send Manager Notifications</span></a>
+            </li>
+            <li>
+               <a href="#"><i class="fas fa-bell"></i> <span style="color:orange;">Send Employee Notifications</span></a>
+            </li>
+             <li>
+                <a href="#"><i class="fas fa-comments"></i> <span style="color:orange;">Manager Feedback</span></a>
+             </li>
+             <li>
+                <a href="#"><i class="fas fa-comments"></i> <span style="color:orange;">Employee Feedback </span></a>
+             </li>
+             -->
+             <li>
+                <a href="{% url "all_leave_view" %}"><i class="fas fa-envelope"></i></i> <span style="color:orange;"> All Leave</span></a>
+             </li>
+             <li>
+               <a href="{% url "policy" %}"><i class="fa fa-user-secret"></i> <span style="color:orange;">Company Policy</a>
+            </li>
+             <li>
+               <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> <span style="color:orange;">Logout</span></a>
+            </li>
+            
+
+         </ul>
+            {% elif user.user_type == '2' %}
+                  <h2 style="color:orange;">Manager Dashboard </h2>
+                  <ul>
+                  <li class="submenu">
+                     <a href="{% url "manager_home" %}"><i class="fas fa-columns"></i> <span style="color:orange;">Dashboard</span> <span class="menu"></span></a>
+                  </li>
+                  <li>
+                     <a href="{% url "staff_apply_leave" %}"><i class="fas fa-envelope-open"></i> <span style="color:orange;">Apply for Leave </a>
+                  </li>
+                  <li>
+                     <a href="{% url "staff_leave_history" %}"><i class="fas fa-history"></i> <span style="color:orange;">Leave History </a>
+                  </li>
+                
+                  <li>
+                     <a href="{% url "st_policy" %}"><i class="fas fa-envelope-open"></i> <span style="color:orange;">Compnay Policy </a>
+                  </li>
+                  <li>
+                     <a href="{% url "employee_leave_view" %}"><i class="fas fa-envelope-open"></i> <span style="color:orange;">Leave Requests</a>
+                  </li>
+                  <li>
+                     <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> <span style="color:orange;">Logout</span></a>
+                  </li>
+                  </ul>
+            {% else %}
+            <h2 style="color:orange;">Employee Dashboard </h2>
+            <ul>
+            <li class="submenu">
+               <a href="{% url "Employee_home" %}"><i class="fas fa-columns"></i> <span style="color:orange;">Dashboard</span> <span class="menu"></span></a>
+            </li>
+            
+           
+           <li>
+               <a href="{% url "employee_leave" %}"><i class="fas fa-history"></i> <span style="color:orange;">Apply Leave </a>
+            </li>
+            
+            <li>
+               <a href="{% url "em_policy" %}"><i class="fas fa-envelope-open"></i> <span style="color:orange;">Company Policy </a>
+            </li>
+            <li>
+               <a href="{% url "employee_leave_history" %}"><i class="fas fa-history"></i> <span style="color:orange;">Leave History </a>
+            </li>
+            
+            <li>
+               <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> <span style="color:orange;">Logout</span></a>
+            </li>
+            </ul>
+
+            {% endif %}
+        </div>
+    </div>
+ </div>

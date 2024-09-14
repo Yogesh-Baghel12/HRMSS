@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="content container-fluid">
+       <div class="page-header">
+          <div class="row align-items-center">
+             <div class="col">
+                <h3 class="page-title">Department</h3>
+                <ul class="breadcrumb">
+                   <li class="breadcrumb-item"><a href="{% url 'home' %}">Dashboard</a></li>
+                   <li class="breadcrumb-item active">Department</li>
+                </ul>
+             </div>
+             {% include "includes/messages.html" %}
+    </div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+       <div class="card card-table">
+          <div class="card-body">
+             <div class="table-responsive">
+                <table class="table table-hover table-center mb-0 datatable">
+                   <thead>
+                      <tr>
+                         <th style="text-align: center;">ID</th>
+                         <th style="text-align: center;">Departmnet Name</th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                    {% for i in department %}
+                      <tr>
+                         <td style="text-align: center;">{{i.id}}</td>
+                         <td style="text-align: center;">{{i.departement_name}}</td>          
+                      </tr>
+                      {% endfor %}
+                   </tbody>
+                </table>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+</div>
+
+
+{% endblock content %}
+
+
+

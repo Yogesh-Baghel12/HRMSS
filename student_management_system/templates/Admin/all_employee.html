@@ -1,0 +1,70 @@
+
+
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="content container-fluid">
+       <div class="page-header">
+          <div class="row align-items-center">
+             <div class="col">
+                <h3 class="page-title">All Manager & Employee</h3>
+                
+                <ul class="breadcrumb">
+                   <li class="breadcrumb-item"><a href="{% url 'home' %}">Dashboard</a></li>
+                  
+                </ul>
+             </div>
+             {% include "includes/messages.html" %}
+    </div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+       <div class="card card-table">
+          <div class="card-body">
+             <div class="table-responsive">
+                <table class="table table-hover table-center mb-0 datatable">
+                   <thead>
+                      <tr>
+                        <th style="text-align: center;">User Name</th>
+                        <th style="text-align: center;">Full Name</th>
+                        <th style="text-align: center;">Gender</th>
+                        <th style="text-align: center;">Role</th>
+                        <th style="text-align: center;">Department Name</th>
+                        <th style="text-align: center;">Contact Number</th>
+                        <th style="text-align: center;">Personal Email</th>
+                        <th style="text-align: center;">Official Email</th>
+                        <th style="text-align: center;">Status</th>
+                    </tr>
+                   </thead>
+                   <tbody>
+                    {% for person in all_employees %}
+                      
+                        <tr>
+                            <td style="text-align: center;">{{ person.admin.username }}</td>
+                            <td style="text-align: center;">{{ person.admin.get_full_name }}</td>
+                            <td style="text-align: center;">{{ person.gender }}</td>
+                            <td style="text-align: center;">{{ person.role }}</td>
+                            <td style="text-align: center;">{{ person.departement_id }}</td>
+                            <td style="text-align: center;">{{ person.contact_number }}</td>
+                            <td style="text-align: center;">{{ person.personal_email }}</td>
+                            <td style="text-align: center;">{{ person.admin.email }}</td>
+                            <td style="text-align: center;">{{ person.get_status_display }}</td>
+                              
+                        </tr>
+                      {% endfor %}
+                   </tbody>
+                </table>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+</div>
+
+
+{% endblock content %}
+
+
+
+
