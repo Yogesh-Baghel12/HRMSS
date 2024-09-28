@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
+from datetime import timedelta,datetime
 from student_management_app.models import StaffLeave,Staff,Employee,EmployeeLeave
 from django.contrib import messages
 
@@ -9,10 +10,53 @@ def HOME(request):
 
     employees = Employee.objects.filter(departement_id=manager.departement_id, admin__user_type=3)
     
+    current_month = datetime.now().month
+    if current_month == 1:  # January
+        new_full_day_leave_allowance = 12
+        new_half_day_leave_allowance = 12
+
+        # Update remaining leaves by adding new allowance
+        manager.full_day_leaves_remaining += new_full_day_leave_allowance
+        manager.half_day_leaves_remaining += new_half_day_leave_allowance
+        
+        manager.save()
+    
+    # Calculate approved leaves for full-day and half-day
+   # approved_full_day_leaves = StaffLeave.objects.filter(
+    #    staff_id=manager, leave_type='full day', status=1  # status=1 means approved
+    #).count()
+    
+   # approved_half_day_leaves = StaffLeave.objects.filter(
+    #    staff_id=manager, leave_type='half day', status=1  # status=1 means approved
+    #).count()
+    
+    approved_leaves = StaffLeave.objects.filter(
+        staff_id=manager, status=1  # status=1 means approved
+    )
+    total_approved_full_day_leaves = 0
+    total_approved_half_day_leaves = 0
+    
+    for leave in approved_leaves:
+        leave_days = (leave.to_date - leave.from_date).days + 1
+        
+    if leave.leave_type == 'full day':
+            total_approved_full_day_leaves += leave_days
+    elif leave.leave_type == 'half day':
+            total_approved_half_day_leaves += leave_days
+    
+    remaining_full_day_leaves = manager.full_day_leaves_remaining - total_approved_full_day_leaves
+    remaining_half_day_leaves = manager.half_day_leaves_remaining - total_approved_half_day_leaves
+
+    
+   
+    
     context = {
         'employees': employees,
-        'full_day_leaves_remaining': manager.full_day_leaves_remaining,
-        'half_day_leaves_remaining': manager.half_day_leaves_remaining,
+        'Total_full_day_leaves': manager.full_day_leaves_remaining,
+        'Total_half_day_leaves': manager.half_day_leaves_remaining,
+        'remiaing_full_day_leave':remaining_full_day_leaves,
+        'remaining_half_day_leave':remaining_half_day_leaves
+        
     }
     return render(request, 'Staffs/manager_dashboard.html', context)
     
